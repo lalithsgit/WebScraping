@@ -22,7 +22,7 @@ runningShoeDict = {}
 
 #"https://runrepeat.com/new-balance-860-v7")
 #https://runrepeat.com/brooks-ghost-10")
-csv_file = open('Road_Runnners.csv', 'w')
+csv_file = open('.\CSVFiles\RunRepeatRunningShoes.csv', 'w')
 # Windows users need to open the file using 'wb'
 # csv_file = open('reviews.csv', 'wb')
 writer = csv.writer(csv_file)
@@ -34,8 +34,6 @@ for shoeURL in urlList:
     totalScore = driver.find_elements_by_xpath('.//div[@class="runscore-value"]')[0].text
     totalReviews = driver.find_elements_by_xpath('//div[@class="stars-container"]/div/a')[0].text 
     companyName = driver.find_elements_by_xpath('//div[@class="aggregate_rating_wrapper"]/a/img')[0].get_attribute("alt")
-    #click on show more facts item
-    
     #get facts
     #check if discontinued
     try:
@@ -43,10 +41,22 @@ for shoeURL in urlList:
         discontinuedShoe = "Y"
     except Exception as e:
         discontinuedShoe = "N"
-    bestTerrain =  driver.find_elements_by_xpath('//*[@class="col-md-12 col-xs-12 fact-item fact-item_terrain"]/div/div[2]/div[1]/div')[1].text
-    archSupport = driver.find_elements_by_xpath('//*[@class="col-md-12 col-xs-12 fact-item fact-item_arch-support"]/div/div[2]/div[1]/div')[1].text
-    bestUse = driver.find_elements_by_xpath('//*[@class="col-md-12 col-xs-12 fact-item fact-item_use"]/div/div[2]/div[1]/div')[1].text
-    actualPrice = driver.find_elements_by_xpath('//*[@class="col-md-12 col-xs-12 fact-item fact-item_price"]/div/div[2]/div[1]/div/span')[1].text
+    try:
+        bestTerrain =  driver.find_elements_by_xpath('//*[@class="col-md-12 col-xs-12 fact-item fact-item_terrain"]/div/div[2]/div[1]/div')[1].text
+    except Exception as e:
+        bestTerrain = ""
+    try:
+        archSupport = driver.find_elements_by_xpath('//*[@class="col-md-12 col-xs-12 fact-item fact-item_arch-support"]/div/div[2]/div[1]/div')[1].text
+    except Exception as e:
+        archSupport = ""
+    try:
+        bestUse = driver.find_elements_by_xpath('//*[@class="col-md-12 col-xs-12 fact-item fact-item_use"]/div/div[2]/div[1]/div')[1].text
+    except Exception as e:
+        bestUse =""
+    try:
+        actualPrice = driver.find_elements_by_xpath('//*[@class="col-md-12 col-xs-12 fact-item fact-item_price"]/div/div[2]/div[1]/div/span')[1].text
+    except Exception as e:
+        actualPrice = ""
     #check if there is a release date
     try:
         releaseDate = driver.find_elements_by_xpath('//*[@class="col-md-12 col-xs-12 fact-item fact-item_release-date"]/div/div[2]/div[1]/div')[1].text
@@ -77,12 +87,27 @@ for shoeURL in urlList:
     ratingsText = driver.find_elements_by_xpath('//*[@id="rr_rating"]/div/div/p')[0].text
     try:
         fiveStars = driver.find_elements_by_xpath('//*[@id="rcs_item_5"]/div')[2].text
-        fourStars = driver.find_elements_by_xpath('//*[@id="rcs_item_4"]/div')[2].text
-        threeStars = driver.find_elements_by_xpath('//*[@id="rcs_item_3"]/div')[2].text
-        twoStars = driver.find_elements_by_xpath('//*[@id="rcs_item_2"]/div')[2].text
-        oneStars = driver.find_elements_by_xpath('//*[@id="rcs_item_1"]/div')[2].text
     except Exception as e:
         fiveSars = ""
+    try:
+        fourStars = driver.find_elements_by_xpath('//*[@id="rcs_item_4"]/div')[2].text
+    except Exception as e:
+        fourStars = ""
+    
+    try:
+        threeStars = driver.find_elements_by_xpath('//*[@id="rcs_item_3"]/div')[2].text
+    except Exception as e:
+        threeStars = ""
+        
+    try:
+        twoStars = driver.find_elements_by_xpath('//*[@id="rcs_item_2"]/div')[2].text
+    except Exception as e:
+        twoStars = ""
+        
+    try:
+        oneStars = driver.find_elements_by_xpath('//*[@id="rcs_item_1"]/div')[2].text
+    except Exception as e:
+        oneStars = ""
     
     try:
         clickButton = driver.find_elements_by_xpath('//i[@class="arrow"]')
@@ -122,7 +147,10 @@ for shoeURL in urlList:
     runningShoeDict['ThreeStars'] = threeStars
     runningShoeDict['TwoStars'] = twoStars
     runningShoeDict['OneStars'] = oneStars
-    writer.writerow(runningShoeDict.values())
+    try:
+        writer.writerow(runningShoeDict.values())
+    except Exception as e:
+        continue
 #end of for loop
 csv_file.close()
 driver.close()
