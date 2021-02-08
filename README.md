@@ -24,3 +24,5 @@ In order to narrow down my research scope, I focused on the top women's running 
 ### Word cloud of good reviews
 ![Top ten running shoes](Images/GoodCloud.png)
 
+## Conclusion
+## Improvements
