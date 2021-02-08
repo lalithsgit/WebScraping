@@ -11,7 +11,8 @@ In order to narrow down my research scope, I focused on the top women's running 
 
 ## Exploratory Data Analysis
 Top ten running shoes in America
-(Images/top10.png)
+![Top ten running shoes](Images/top10.png)
+
 
 Top ten running shoes scores by RunRepeat.com
 
