@@ -18,8 +18,9 @@ In order to narrow down my research scope, I focused on the top women's running 
 ![Top ten running shoes](Images/TopScores.png)
 
 ### Price Distribution
+![Top ten running shoes](Images/PriceDistribution.png)
 
 ## NLP - Natural Language Processing
-Word cloud of good reviews
-
+### Word cloud of good reviews
+![Top ten running shoes](Images/GoodCloud.png)
 
